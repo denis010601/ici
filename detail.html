@@ -77,80 +77,91 @@
             </div>
         </div>
     </header>
-        
-  <main class="main">
-    <section class="video-section">
-        <div class="wrapper">
-            <div class="video-wrapper">
-                <img src="img/pl.png" alt="video/video.mp4" class="video-placeholder">
-                <video id="myVideo" loop autoplay muted>
-                    
-                    
-                </video>
-                <img src="img/logow.png" alt="Логотип" class="video-logo">
+    <main>
+        <section class="back">
+            <div class="wrapper">
+
+                <a href="back__link"><img src="" alt="">Вернуться в каталог</a>
             </div>
-        </div>
-    </section>
-    <section class="product">
-        <h2 class="title product__title title--section">Популярные модели</h2>
-        <div class="wrapper product__wrapper">
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-        </div>
-    </section>
-    <section class="advantage">
-        <h2 class="title  title--section">ОТЛИЧНОЕ РЕШЕНИЕ ДЛЯ ВАШЕЙ КВАРТИРЫ</h2>
-        <p class="desc desc--section  ">
-            Ваш дом — это место, где вы создаете свои уютные уголки и осуществляете мечты о идеальном пространстве. Мы, компания с двадцатилетним опытом в индустрии мебели, гордимся тем, что можем помочь вам сделать вашу квартиру идеальным отражением вашего стиля и комфорта.
-        </p>
-        <div class="wrapper advantage__wrapper">
-            <div class="advantage-item advantage-item--padding">
-                <img src="img/product/p1.jpg" alt="" class="advantage-item__img">
-                <div class="advantage-col">
-                    <h3 class="title advantage-item__title">20</h3>
-                    <span class="subtitle advantage-item__subtitle">ЛЕТ<br>ОПЫТА</span>
-                    <p class="desc advantage-item__desc">С 2003 года мы занимаемся созданием мебели высочайшего качества, которая сочетает в себе функциональность, эстетику и долговечность. Наш опыт в области дизайна и производства мебели позволяет нам предложить вам продукцию, соответствующую самым высоким стандартам качества.</p>
+        </section>
+        <section class="detail-page">
+            <div class="wrapper">
+                <div class="detail detail__wrapper">
+                    <div id="slider">
+
+                        <div class="detail__slider">
+                            <img src="img/product/p1.jpg" alt="" class="detail__img">
+                        </div>
+                        <div class="detail__slider-list">
+                            <img src="img/product/p1.jpg" alt="" class="detail__list_img">
+                            <img src="img/product/p1.jpg" alt="" class="detail__list_img">
+                            <img src="img/product/p1.jpg" alt="" class="detail__list_img">
+                            <img src="img/product/p1.jpg" alt="" class="detail__list_img">
+                            <img src="img/product/p1.jpg" alt="" class="detail__list_img">
+                        </div>
+                    </div>
+
+                    <form class="detail__primary-info">
+
+                        <fieldset title="Комфорт | Диван П-образный"> </fieldset>
+                        <h1 class="detail__title">Комфорт | Диван П-образный</h1>
+                        <!-- От вариантов -->
+                        <button class="detail__store">В наличии</button>
+                        <span class="detail__decor">Под заказ</span>
+                        <div class="detail__material">
+                            <h3 class="detail__material-title">Материал обивки</h3>
+                            <div class="detail__material-list" action="#">
+                                <div class="detail__material-item">
+                                    <img src="" alt="" class="detail__material-img">
+                                    <input type="radio" name="materal">
+                                    <span class="detail__material-text">Текст</span>
+                                </div>
+                                <div class="detail__material-item">
+                                    <img src="" alt="" class="detail__material-img">
+                                    <input type="radio" name="materal">
+                                    <span class="detail__material-text">Текст</span>
+                                </div>
+                                <div class="detail__material-item">
+                                    <img src="" alt="" class="detail__material-img">
+                                    <input type="radio" name="materal">
+                                    <span class="detail__material-text">Текст</span>
+                                </div>
+                                <div class="detail__material-item">
+                                    <img src="" alt="" class="detail__material-img">
+                                    <input type="radio" name="materal">
+                                    <span class="detail__material-text">Текст</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="detail__price">от 313 000 р</h3>
+                        <span class="detail__price-info">Цена указана в миниманльной стоимости</span>
+                        <button class="detail__button">Купить в 1 клик</button>
+                        <h3 class="detail__manager">связаться с менеджером</h3>
+                        <div class="detail__manager-list">
+                            <a href="" class="detail__manager-connect"><img src="" alt="" class="detail__manager-img">Для розничных клиентов и дизайнеров</a>
+                            a href="" class="detail__manager-connect"><img src="" alt="" class="detail__manager-img">Для корпоративных клиентов</a>
+                        </div>
+                        <div class="detail__create-list">
+                            <div class="detail__create-item"><span class="detail__create-title"></span> I'CI</div>
+                            <div class="detail__create-item"><span class="detail__create-title"></span> I'CI</div>
+                            <div class="detail__create-item"><span class="detail__create-title"></span> I'CI</div>
+                            <div class="detail__create-item"><span class="detail__create-title"></span> I'CI</div>
+                        </div>
+                        <p class="detail__desc">Воплощение уюта - наш новый диван в форме 'П'. Это место, где можно расположиться всей семьей, провести время в теплой обстановке, наслаждаясь близостью и уютом в каждом уголке</p>
+                        <div class="detail__size">
+                            <h3 class="detail__size-title">Размер (Д + Ш + В)</h3>
+                            <div class="detail__size-list">
+                                <div class="detail__size-list-item">
+                                    <input type="radio" value="218 СМ × 200 СМ × 200 СМ" name="size" id="size{n}">
+                                    <label for="size{n}" class="detail__size-list-item-title">218 СМ × 200 СМ × 200 СМ</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="advantage-item advantage-item--padding">
-                <img src="img/product/p1.jpg" alt="" class="advantage-item__img">
-                <div class="advantage-col">
-                    <h3 class="title advantage-item__title">30
-              
-                        </h3>
-                    <span class="subtitle advantage-item__subtitle">          НАИМЕНОВАНИЙ<br>ПРОДУКЦИИ</span>
-                    <p class="desc advantage-item__desc">Более 30 наименований продукции в нашем ассортименте, включая мягкую мебель, кухни, спальные гарнитуры и многое другое. Вы всегда найдете то, что идеально впишется в ваш интерьер.</p>
-                </div>
-            </div>
-             <div class="advantage-item advantage-item--padding">
-                <img src="img/product/p1.jpg" alt="" class="advantage-item__img">
-                <div class="advantage-col">
-                    <h3 class="title advantage-item__title">100</h3>
-                    <span class="subtitle advantage-item__subtitle">ОТВЕТСТВЕННЫХ<br>СОТРУДНИКОВ</span>
-                    <p class="desc advantage-item__desc">Наш коллектив из более чем 100 ответственных сотрудников стремится к одной цели — созданию мебели, отвечающей вашим потребностям и ожиданиям. Мы гордимся высоким профессионализмом и дедикацией каждого члена нашей команды.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-  </main>
+        </section>
+    </main>
 
   <footer class="footer">
     <div class="wrapper footer__wrapper">
@@ -208,6 +219,12 @@
   <div class="burger-menu">
     <div class="close">&#10005</div>
   </div>
+  <div class="filter-popup">
+                <button class="closeFilter ">&#10005</button>
+                <div class="filret-list">
+
+                </div>
+            </div>
   <script src="js/script.js"></script>
 </body>
 </html>
