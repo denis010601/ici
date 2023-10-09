@@ -80,5 +80,26 @@ window.addEventListener('DOMContentLoaded',() =>{
     checklink()
 
         
-   
+   if(document.querySelectorAll('.detail__size-list-item')){
+        let size = document.querySelectorAll('.detail__size-list-item');
+        let sizeList = document.querySelector('.detail__size-list');
+        sizeList.addEventListener('click', (e)=>{
+            sizeList.classList.add('active') 
+            for(let i = 0; i < size.length; i++){
+                
+                size[i].addEventListener('click', e => {
+                    for(let j = 0; j < size.length; j++){
+                        size[j].classList.remove('active')
+                    }
+                    if(!size[i].classList.contains('active')){
+                        
+                    }
+                    sizeList.classList.remove('active') 
+                })
+            }
+            e.target.classList.add('active')
+      
+        })
+       
+   }
 }) 
