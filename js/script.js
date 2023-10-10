@@ -77,29 +77,54 @@ window.addEventListener('DOMContentLoaded',() =>{
     if(window.innerWidth <= 768 && !document.querySelector('.nav-burger')){
         checklink()
     }
-    checklink()
+    checklink();
+    let closeElement = (all) =>{
+        let close = document.querySelectorAll('.'+all);
+        for(let i = 0; i < close.length; i++){
+            close[i].classList.remove('active')
+        }
+    }
+    let listDetail = (id) => {
+        let listOpen = document.querySelector('#'+ id +'list');
+        if (!document.querySelector('#' + id + 'list .list-btn-close')){
+            let listBtnClose = document.createElement('div');
+            listBtnClose.classList.add('list-btn-close');
+            listBtnClose.innerHTML = '&#10006;';
+            listOpen.prepend(listBtnClose);
+        }
 
+            let listBtnClose = document.querySelector('#' + id + 'list .list-btn-close');
         
-   if(document.querySelectorAll('.detail__size-list-item')){
-        let size = document.querySelectorAll('.detail__size-list-item');
-        let sizeList = document.querySelector('.detail__size-list');
-        sizeList.addEventListener('click', (e)=>{
-            sizeList.classList.add('active') 
-            for(let i = 0; i < size.length; i++){
-                
-                size[i].addEventListener('click', e => {
-                    for(let j = 0; j < size.length; j++){
-                        size[j].classList.remove('active')
-                    }
-                    if(!size[i].classList.contains('active')){
-                        
-                    }
-                    sizeList.classList.remove('active') 
-                })
-            }
-            e.target.classList.add('active')
-      
+        closeElement(listOpen.className);
+        listOpen.classList.add('active')
+        listBtnClose.addEventListener('click', () =>{
+            listOpen.classList.remove('active');
         })
-       
-   }
+    }
+    let btnDetail = document.querySelectorAll('.detail__list-btn')
+    for(let i = 0; i < btnDetail.length; i++){
+        btnDetail[i].addEventListener('click', e => {
+            listDetail(btnDetail[i].id)
+        });
+    }
+
+
+    let addActiveList = (list) =>{
+        for(let i = 0; i < list.length; i++){
+            list[i].classList.remove('active');
+        }
+           
+    }
+    if (document.querySelectorAll('.problem-item')){
+        let listQuestion = document.querySelectorAll('.problem-item');
+        for(let i = 0; i < listQuestion.length; i++){
+            listQuestion[i].addEventListener('click', () => {
+                addActiveList(listQuestion)
+                listQuestion[i].classList.add('active');
+            })
+        }
+    };
+
+    
+
 }) 
