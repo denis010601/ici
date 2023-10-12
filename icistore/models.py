@@ -6,23 +6,36 @@ from imagekit.processors import ResizeToFill
 
 class Gallery(models.Model):
     image = models.ImageField(upload_to='gallery/')
-
+    class Meta:
+        verbose_name = "Галлерея"
+        verbose_name_plural = "Галлерея"
     def __str__(self):
         return f"Image {self.id}"
+
 class ImageModel(models.Model):
     image = models.ImageField(upload_to=f"{timezone.now().year}/{timezone.now().month:02d}/{timezone.now().day:02d}")
-
+    class Meta:
+        verbose_name = "Картинка"
+        verbose_name_plural = "Картинки"
 
     def __str__(self):
         return f"Image {self.pk}"
+
+
+
 class Material(models.Model):
     name = models.CharField(max_length=100)
-
+    class Meta:
+        verbose_name = "Материал"
+        verbose_name_plural = "Материалы"
     def __str__(self):
         return self.name
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
-
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
     def __str__(self):
         return self.name
 
@@ -42,7 +55,9 @@ class Sofa(models.Model):
     images = models.ManyToManyField(ImageModel, blank=True, verbose_name="Фото")
     
     # Другие поля для описания диванов
-
+    class Meta:
+        verbose_name = "Диван"
+        verbose_name_plural = "Диваны"
     def __str__(self):
         return self.name
 
@@ -83,7 +98,9 @@ class InteriorSofa(models.Model):
     is_top_product = models.BooleanField(default=False, verbose_name="Популярный")
     price = models.IntegerField(default=False, blank=True, verbose_name="Цена")
     images = models.ManyToManyField(ImageModel, blank=True, verbose_name="Фото")
-    
+    class Meta:
+        verbose_name = "Интерьерный диван"
+        verbose_name_plural = "Интерьерные диваны"
     # Другие поля для описания интерьерных диванов
 
     def __str__(self):
@@ -123,7 +140,10 @@ class Chair(models.Model):
     is_top_product = models.BooleanField(default=False, verbose_name="Популярный")
     price = models.IntegerField(default=False, blank=True, verbose_name="Цена")
     images = models.ManyToManyField(ImageModel, blank=True, verbose_name="Фото")
-    
+
+    class Meta:
+        verbose_name = "Кресло"
+        verbose_name_plural = "Кресла"
     # Другие поля для описания кресел
 
     def __str__(self):
@@ -168,7 +188,9 @@ class Ottoman(models.Model):
     is_top_product = models.BooleanField(default=False, verbose_name="Популярный")
     price = models.IntegerField(default=False, blank=True, verbose_name="Цена")
     images = models.ManyToManyField(ImageModel, blank=True, verbose_name="Фото")
-    
+    class Meta:
+        verbose_name = "Пуф"
+        verbose_name_plural = "Пуфы"
     # Другие поля для описания пуфов
 
     def __str__(self):
