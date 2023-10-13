@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Sofa, InteriorSofa, Chair, Ottoman, Material, ImageModel
+from .models import Category, Sofa, InteriorSofa, Chair, Ottoman, Material, ImageModel, MainPageContent, Advantage, Filter
 
 
 class ImageModelAdmin(admin.ModelAdmin):
@@ -26,8 +26,14 @@ class ChairAdmin(admin.ModelAdmin):
 
 class OttomanAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'is_published', 'is_top_product')
+class MainPageContentAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        # Проверка, есть ли уже запись
+        return not MainPageContent.objects.exists()
 
-
+admin.site.register(MainPageContent, MainPageContentAdmin)
+admin.site.register(Filter)
+admin.site.register(Advantage)
 admin.site.register(Category)
 admin.site.register(Material, MaterialAdmin)
 

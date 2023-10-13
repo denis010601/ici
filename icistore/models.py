@@ -22,11 +22,18 @@ class Material(models.Model):
 
     def __str__(self):
         return self.name
+class Filter(models.Model):
+    name = models.CharField(max_length=100)
+    key = models.CharField(max_length=50)  # Ключ фильтра
+    value = models.CharField(max_length=50)  # Значение фильтра
 
+    def __str__(self):
+        return self.name
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-
+    name = models.CharField(max_length=100, unique=True)
+    images = models.ImageField( blank=True, verbose_name="Иконка категории", default="", null=True)
+    filters = models.ManyToManyField(Filter, blank=True)
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
@@ -50,15 +57,16 @@ class Product(models.Model):
     images = models.ManyToManyField(ImageModel, blank=True, verbose_name="Фото")
     is_published = models.BooleanField(default=True, verbose_name="Опубликован")
     is_top_product = models.BooleanField(default=False, verbose_name="Популярный")
-
+    filters = models.ManyToManyField(Filter, blank=True)
     def __str__(self):
         return f'Filter for {self.title}'
 
 
 class Sofa(Product):
     # Другие поля для описания диванов
+
     class Meta:
-        verbose_name = "Диван"
+        verbose_name = "Диваны"
         verbose_name_plural = "Диваны"
 
     form_choices = [
@@ -79,6 +87,7 @@ class Sofa(Product):
 
 
 class InteriorSofa(Product):
+
     appearance_choices = [
         ('с высокой спинкой', 'С высокой спинкой'),
         ('с невысокой спинкой', 'С невысокой спинкой'),
@@ -141,3 +150,32 @@ class Ottoman(Product):
     class Meta:
         verbose_name = "Пуф"
         verbose_name_plural = "Пуфы"
+
+
+
+
+# Для главной страницы
+
+
+class MainPageContent(models.Model):
+    video = models.FileField(upload_to='videos/', null=True, blank=True, verbose_name="Видео")
+    videoImage = models.ImageField(upload_to='videos/', null=True, blank=True, verbose_name="Картинка Видео")
+    advantages = models.ManyToManyField('Advantage', verbose_name="Преимущества")
+
+    class Meta:
+        verbose_name = "Видео для главной страницы"
+        verbose_name_plural = "Видео для главной страницы"
+    def __str__(self):
+        return "Main Page Content"
+
+class Advantage(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Заголовок")
+    subtitle = models.CharField(max_length=100, verbose_name="Подзаголовок")
+    description = models.TextField(verbose_name="Описание")
+    image = models.ImageField(upload_to=f"{timezone.now().year}/{timezone.now().month:02d}/{timezone.now().day:02d}", verbose_name="Заголовок")
+
+    class Meta:
+        verbose_name = "Преимущества для главной страницы"
+        verbose_name_plural = "Преимущества для главной страницы"
+    def __str__(self):
+        return self.title

@@ -13,69 +13,26 @@
     </section>
     <section class="product">
         <div class="wrapper product__wrapper">
+            {% for product in allproduct %}
             <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
+                <h3 class="card-product__title">{{ product.title }}</h3>
+                {% if product.images.first %}
+                    <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="product__img">
+                {% endif %}
+
+
+
             </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
-            <a href="#" class="card-product">
-                <h3 class="card-product__title">Название продукта</h3>
-                <img src="img/product/p1.jpg" alt="" class="product__img">
-            </a>
+            {% endfor %}
+
         </div>
     </section>
 
   </main>
+     <div class="filter-popup">
+                <button class="closeFilter ">&#10005</button>
+                <div class="filret-list">
 
+                </div>
+            </div>
 {% endblock content %}

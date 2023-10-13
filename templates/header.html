@@ -23,37 +23,28 @@
             </div>
             <div class="header__bottom">
                 <div class="header__bottom-item logo">
-                    <img  src="{% static 'img/logobw.png' %}" alt="Логотип" class="header__logo">
+                    <a href="{% url 'home' %}">
+                                          <img  src="{% static 'img/logobw.png' %}" alt="Логотип" class="header__logo">
+                    </a>
+
                 </div>
                 <nav class="header__nav">
                     <ul class="header__nav-list">
                         <li class="header__nav-item">
                             <span  class="header__nav-link">Каталог</span>
                             <ul class="submenu">
-                                <li>
-                                    <a href="" class="submenu-item">
-                                        <img class="submenu-item__img" src="{% static 'img/filter_divan.png' %}" alt="">
-                                        Диваны
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" class="submenu-item">
-                                        <img class="submenu-item__img" src="{% static 'img/filter_divan.png' %}" alt="">
-                                        Диваны
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" class="submenu-item">
-                                        <img class="submenu-item__img" src="{% static 'img/filter_divan.png' %}" alt="">
-                                        Диваны
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" class="submenu-item">
-                                        <img class="submenu-item__img" src="{% static 'img/filter_divan.png' %}" alt="">
-                                        Диваны
-                                    </a>
-                                </li>
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{% url 'store' category.name %}" class="submenu-item">
+                                            {% if category.images %}
+                                                <img class="submenu-item__img" src="{{ category.images.url }}" alt="">
+                                            {% endif %}
+                                            {{ category.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+
+
 
                                 <!-- Добавьте еще необходимые подпункты -->
                             </ul>

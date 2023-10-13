@@ -3,10 +3,10 @@
     <div class="wrapper footer__wrapper">
         <div class="footer__col">
             <h4 class="title footer__title">Каталог</h4>
-            <a href="" class="footer__link">В наличии</a>
-            <a href="" class="footer__link">Акции </a>
-            <a href="" class="footer__link">Диваны</a>
-            <a href="" class="footer__link">Кресла</a>
+            {% for category in categories %}
+                <a href="" class="footer__link">{{ category.name }}</a>
+            {% endfor %}
+
         </div>
         <div class="footer__col">
             <h4 class="title footer__title">Покупателям</h4>
@@ -55,7 +55,7 @@
   <div class="burger-menu">
     <div class="close">&#10005</div>
   </div>
-  <script src="js/script.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 
 
 
