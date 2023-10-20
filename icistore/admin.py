@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Category, Sofa, InteriorSofa, Chair, Ottoman, Material, ImageModel, MainPageContent, Advantage, Filter
+from .models import *
 
 
 class ImageModelAdmin(admin.ModelAdmin):
@@ -32,14 +32,15 @@ class MainPageContentAdmin(admin.ModelAdmin):
         return not MainPageContent.objects.exists()
 
 admin.site.register(MainPageContent, MainPageContentAdmin)
-admin.site.register(Filter)
+admin.site.register(Type)
 admin.site.register(Advantage)
 admin.site.register(Category)
 admin.site.register(Material, MaterialAdmin)
 
 admin.site.register(ImageModel, ImageModelAdmin)
-
-admin.site.register(Sofa, SofaAdmin)
-admin.site.register(InteriorSofa, InteriorSofaAdmin)
-admin.site.register(Chair, ChairAdmin)
-admin.site.register(Ottoman, OttomanAdmin)
+admin.site.register(FormProduct)
+admin.site.register(Product)
+admin.site.register(Size)
+admin.site.register(Sleeper)
+admin.site.register(Appearance)
+admin.site.register(Legs)

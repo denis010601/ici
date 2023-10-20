@@ -30,7 +30,9 @@
                 </div>
                 <nav class="header__nav">
                     <ul class="header__nav-list">
+                    {% if categories %}
                         <li class="header__nav-item">
+
                             <span  class="header__nav-link">Каталог</span>
                             <ul class="submenu">
                                 {% for category in categories %}
@@ -49,6 +51,7 @@
                                 <!-- Добавьте еще необходимые подпункты -->
                             </ul>
                         </li>
+                     {% endif %}
                         <li class="header__nav-item"><a href="#2" class="header__nav-link">Покупателям</a></li>
                         <li class="header__nav-item"><a href="#3" class="header__nav-link">Блог</a></li>
                         <li class="header__nav-item"><a href="#4" class="header__nav-link">О Компании</a></li>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <main>
         <section class="back">
             <div class="wrapper">
 
-                <a class="back__link"><img src="" alt="">Вернуться в каталог</a>
+                <a href="{% url 'store' category_name=product.category %}" class="back__link"><img src="" alt="">Вернуться в каталог</a>
             </div>
         </section>
 
@@ -14,17 +14,23 @@
                 <div class="detail__wrapper">
 
                     <div class="detail__global-img">
-                        <img src="img/product/p1.jpg" alt="" class="detail__img">
+                        {% if product.images.first %}
+                                        <img src="{{ product.images.first.image.url }}" alt="{{ moreproduct.title }}" class="product__img">
+                                    {% else %}
+                                    <img src="{% static 'img/logow.png' %}" alt="Логотип" class="video-logo">
+                        {% endif %}
                     </div>
 
                     <form action="$" class="detail__info">
-                        <h1 class="detail__info-title">Комфорт
+                        <h1 class="detail__info-title">{{ product.title }}
                         </h1>
-                        <p class="detail__info-subtitle">Диван П-образный</p>
-                        <p class="detail__info-price">от 313 000 р</p>
+                        {% if product.subtitle %}
+                        <p class="detail__info-subtitle">{{product.subtitle}}</p>
+                        {% endif %}
+                        <p class="detail__info-price">от {{product.price}} р</p>
                         <p class="detail__info-price-info">Цена указана в миниманльной стоимости</p>
 
-                        <div id="variables" class="detail__list-btn">В наличии 10 вариантов</div>
+                        {% comment %} <div id="variables" class="detail__list-btn">В наличии 10 вариантов</div>
                         <div class="list" id="variableslist">
                             <div class="detail__list-item">
                                 <input type="radio" name="id1" value id="">
@@ -55,108 +61,144 @@
                                     <p>lorem lorem</p>
                                 </label>
                             </div>
-                        </div>
-
+                        </div> {% endcomment %}
+                        {% if product.materials %}
                         <div id="material" class="detail__list-btn">материал</div>
                         <div class="list" id="materiallist">
+                            {% for material in product.materials.all %}
                             <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
+                                
+                                <input checked type="radio" value="{{ material.name }}{{ material.id }}" name="материал" id="{{ material.name }}{{ material.id }}">
+                                <label for="{{ material.name }}{{ material.id }}">
+                                    {% if material.images %}
+                                        <img src="{{ material.images.url }}" alt="">
+                                    {% endif %}
+                                    <p>{{ material.name }}</p>
                                 </label>
                             </div>
-                            <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
-                            </div>
-                            <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
-                            </div>
-                            <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
-                            </div>
+                                {% endfor %}
                         </div>
-
-                        <div id="size" class="detail__list-btn">220 cm x 220 cm x 190 cm</div>
+                        {% endif %}
+                        {% if product.size %}
+                            <div id="size" class="detail__list-btn">{{ product.size.sizeL }} мм x {{ product.size.sizeW }} мм x {{ product.size.sizeH }}  мм</div>
+                            {% endif %}
+                        {% if allproducts %}
                         <div class="list" id="sizelist">
+                            {% for moreproduct in allproducts %}
                             <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
+                                <a href="{% url 'detail' category_name=moreproduct.category product_name=moreproduct.title %}">
+                                    {% if moreproduct.images.first %}
+                                        <img src="{{ moreproduct.images.first.image.url }}" alt="{{ moreproduct.title }}" class="product__img">
+                                    {% endif %}
+                                    <p>{{ moreproduct.title }}</p>
+                                </a>
                             </div>
-                            <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
-                            </div>
-                            <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
-                            </div>
-                            <div class="detail__list-item">
-                                <input type="radio" name="" id="">
-                                <label>
-                                    <img src="" alt="">
-                                    <p>lorem lorem</p>
-                                </label>
-                            </div>
+                            {% endfor %}
                         </div>
-                        <button class="detail__btn" type="submit">Купить в 1 клик</button>
+                        {% endif %}
+                        <div id="peopleO"  class="detail__btn">Купить в 1 клик</div>
+                        <div id="people" class="form-people">
+                            <div id="peopleC"  class="closeFilter">&#10005</div>
+                            <h2 class="title">Оставить заявку</h2>
+                            <div class="form__wrapper">
+                                <div class="form__product">
+                                    <h3 class="title">Наименование: {{ product.title }}</h3>
+                                    <h3 class="title" id="mat">Материал: Материал</h3>
+                                    {% if product.size %}
+                                    <h3 class="title">Размер: {{ product.size.sizeL }} мм x {{ product.size.sizeW }} мм x {{ product.size.sizeH }}  мм</h3>
+                                    {% endif %}
+                                </div>
+                          
+                                <div class="form__inputs">
+                                    <div class="form-input">
+                                      
+                                        <input name="name"  placeholder="Имя" id="name" type="text">
+                                    </div>
+                                    <div class="form-input">
+                                        
+                                        <input name="phone"  placeholder="Номер телефона" id="phone" type="text">
+                                    </div>
+                                    <div class="form-input">
+                                    
+                                        <input name="mail"  placeholder="E-mail" id="mail" type="text">
+                                    </div>
+                                    <div class="form-input">
+                                       
+                                        <textarea name="comment" placeholder="Комментарий"  id="comment" type="text"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <span>нажимая кнопку 'Отправить' вы соглашаетесь согласие на обработку персональных данных</span>
+                            <button class="detail__btn" type="submit">Отправить</button>
+                        </div>
                         <div class="detail__settings">
-                            <div class="detail__settings-item"><span><b>Производитель: &nbsp;</b>I’CI</span></div>
-                            <div class="detail__settings-item"><span><b>Страна: &nbsp;</b>Россия</span></div>
-                            <div class="detail__settings-item"><span><b>Гарантия: &nbsp;</b>2 года</span></div>
-                            <div class="detail__settings-item"><span><b>Срок поставки: &nbsp;</b>от 20 дней</span></div>
+                            
+                            <div class="detail__settings-item"><span><b>Производитель: &nbsp;</b>{{ product.manufacturer }}</span></div>
+                            <div class="detail__settings-item"><span><b>Страна: &nbsp;</b>{{ product.country }}</span></div>
+                            <div class="detail__settings-item"><span><b>Гарантия: &nbsp;</b>{{ product.warranty }}</span></div>
+                            <div class="detail__settings-item"><span><b>Срок поставки: &nbsp;</b>от {{ product.delivery_days }} дней</span></div>
                         </div>
                     </form>
                 </div>
-                <div class="detail__features">
-                   <h2 class="detail__feature-title">Характеристики</h2>
-                   <div class="feature-list">
-                             <div class="feature-list__item">
-                                <span class="feature-text">Название</span>
-                                <span class="feature-text">Значение</span>
+                {% if data_dict %}
+                    <div class="detail__features">
+                    <h2 class="detail__feature-title">Характеристики</h2>
+                        <div class="feature-list">
+                            {% for field, data in data_dict.items %}
+                                {% if data.value %}
+                                    <div class="feature-list__item">
+                                        <span class="feature-text">{{ data.verbose_name }}</span>
+                                        <span class="feature-text">{{ data.value }}</span>
+                                    </div>
+                                {% endif %}             
+                            {% endfor %}     
+                        </div>
+                {% endif %}
+                {% if product.images %}
+                        <div class="detail__more">
+                            {% for image in product.images.all %}
+                                {% if product.images.last.image.url != image.image.url %}
+                                    <div class="detail__photo"><img src="{{ image.image.url }}" alt="s"></div>
+                                 {% endif %}
+                                {% endfor %}
+                                {% if product.images.last and product.description %}
+                                
+                                <div class="detail__photo--design">
+                                    <div class="detail__photo__img">
+                                        <img src="{{ product.images.last.image.url }}" alt="">
+                                        
+                                    </div>
+                                    <div class="detail__photo-col">
+                                        <h3 class="title detai__photo-title">Дизайн</h3>
+                                        <p class="desc">{{ product.description }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
                             </div>
-
-                   </div>
-                   <div class="detail__more">
-                    <div class="detail__photo"><img src="img/product/p1.jpg" alt=""></div>
-                    <div class="detail__photo"><img src="img/product/p1.jpg" alt=""></div>
-                    <div class="detail__photo--design">
-                        <div class="detail__photo__img">
-                            <img src="img/product/p1.jpg" alt="">
-
-                        </div>
-                        <div class="detail__photo-col">
-                            <h3 class="title detai__photo-title">Дизайн</h3>
-                            <p class="desc">Касание мягкости и эстетики. Ощутите нежность каждого момента, уютно устроившись на этом чудесном диване. Мягкие подушки обнимут вас, создавая атмосферу тепла и комфорта. Откройте для себя идеальное сочетание элегантности и практичности. Легкий уход за обивкой из высококачественного материала обеспечит долгий срок службы дивана. Великолепное сочетание цветов и форм придаст вашему интерьеру неповторимый шарм. Наслаждайтесь вечерами в уютной обстановке, зная, что диван 'П' сделан для вашего уюта и удовольствия. Каждый момент на нем — это погружение в атмосферу невероятного спокойствия и гармонии. Почувствуйте истинное наслаждение сидя на диване</p>
-                        </div>
-                    </div>
-                   </div>
+                   {% endif %}
                 </div>
             </div>
 
 
         </section>
     </main>
-
+    <script type="text/javascript">
+        const people = document.querySelector("#people");
+        const peopleC = document.querySelector("#peopleC");
+        const peopleO = document.querySelector("#peopleO");
+        const mat = document.querySelector("#mat");
+        peopleC.addEventListener("click",(e) => {
+            people.style.display = "none";
+        })
+        peopleO.addEventListener("click",(e) => {
+            people.style.display = "flex";
+            let materal = document.querySelectorAll(".detail__list-item input[name='материал']");
+            for (let i = 0; i < materal.length; i++) {
+                if (materal[i].checked){
+                    mat.innerHTML = `Материал : ${materal[i].value}`;
+                }
+            }
+            console.log(materal);
+        })
+    </script>
 {% endblock content %}

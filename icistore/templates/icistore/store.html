@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
  <main class="main">
     <section class="filter">
         <div class="wrapper">
             <div class="filter-pop">
                 <span class="filter-text">Фильтры</span>
-                <img src="img/filter.svg" alt="" class="filter-img">
+                <img src="{% static 'img/filter.svg' %}" alt="" class="filter-img">
             </div>
 
         </div>
     </section>
     <section class="product">
-        <div class="wrapper product__wrapper">
-            {% for product in allproduct %}
-            <a href="#" class="card-product">
+        <div id="product-list" class="wrapper product__wrapper">
+            {% for product in products %}
+            <a href="{% url 'detail' category_name=product.category product_name=product.title %}" class="card-product">
                 <h3 class="card-product__title">{{ product.title }}</h3>
                 {% if product.images.first %}
                     <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="product__img">
@@ -27,12 +27,137 @@
 
         </div>
     </section>
-
+      
   </main>
      <div class="filter-popup">
                 <button class="closeFilter ">&#10005</button>
-                <div class="filret-list">
 
-                </div>
+                    <form class="form-filter-list" method="post">
+                        <div class="filter-list">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                        </div>
+
+                        <button type="submit">Фильтровать</button>
+                    </form>
+       
             </div>
+<script type="text/javascript">
+document.querySelector('.form-filter-list').addEventListener('submit', function(event) {
+  event.preventDefault();  // Предотвращаем стандартное поведение отправки формы
+
+  const formData = new FormData(this);
+  const category_name = window.location.pathname.split('/').pop();
+
+  // Получаем токен CSRF из мета-тегов
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', `/store/${category_name}`);
+  xhr.setRequestHeader("X-CSRFToken", csrfToken);
+  console.log(xhr)
+  xhr.onload = function() {
+  if (xhr.status === 200) {
+    const parser = new DOMParser();
+    const responseDoc = parser.parseFromString(xhr.responseText, 'text/html');
+    const productContent = responseDoc.getElementById('product-list').innerHTML;
+    document.getElementById('product-list').innerHTML = productContent;
+  }
+};
+
+  xhr.send(formData);
+});
+
+
+    if (document.getElementById("id_size")){
+
+  
+    const selectElement = document.getElementById('id_size');
+    const customSelect = document.createElement('div');
+    customSelect.classList.add('custom-select');
+    
+    const selectedOption = document.createElement('div');
+    selectedOption.classList.add('selected-option');
+    selectedOption.textContent = selectElement.options[selectElement.selectedIndex].textContent;
+    
+    const optionsContainer = document.createElement('div');
+    optionsContainer.classList.add('options');
+    
+    for (let i = 0; i < selectElement.options.length; i++) {
+        const optionDiv = document.createElement('div');
+        optionDiv.classList.add('option');
+        optionDiv.textContent = selectElement.options[i].textContent;
+        optionDiv.dataset.value = selectElement.options[i].value;
+    
+        optionDiv.addEventListener('click', () => {
+            selectElement.value = optionDiv.dataset.value;
+            selectedOption.textContent = optionDiv.textContent;
+            optionsContainer.style.display = 'none';
+        });
+    
+        optionsContainer.appendChild(optionDiv);
+    }
+    
+    customSelect.appendChild(selectedOption);
+    customSelect.appendChild(optionsContainer);
+    selectElement.insertAdjacentElement('afterend', customSelect);
+    
+    selectedOption.addEventListener('click', () => {
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    });
+}
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+checkboxes.forEach(checkbox => {
+  checkbox.style.display = 'none'; // Скрыть оригинальный чекбокс
+
+  const label = document.createElement('span');
+  label.htmlFor = checkbox.id;
+  label.style.display = 'inline-block';
+  label.style.cursor = 'pointer';
+  label.style.padding = '10px 10px';
+  label.style.border = '1px solid #3b3b3b';
+  label.style.margin = '0 4px 5px 0 ';
+  label.style.backgroundColor = 'rgba(59, 59, 59, 0.5)';
+  label.style.color = '#fff';
+  label.style.fontSize = '13px';
+
+  label.addEventListener('mouseover', () => {
+    if (!checkbox.checked) {
+      label.style.backgroundColor = 'rgba(59, 59, 59, 0.7)';
+    }
+  });
+
+  label.addEventListener('mouseout', () => {
+    if (!checkbox.checked) {
+      label.style.backgroundColor = 'rgba(59, 59, 59, 0.5)';
+    }
+  });
+
+  checkbox.addEventListener('change', () => {
+    if (checkbox.checked) {
+      label.style.border = '1px solid #000';
+      label.style.backgroundColor = '#000';
+      label.style.padding = '1.5px 5.1px';
+      label.style.color = '#fff';
+      label.style.transition = "0s"
+      label.innerHTML = '\u2713';
+    } else {
+      label.style.border = '1px solid #3b3b3b';
+      label.style.padding = '10px';
+      label.style.backgroundColor = 'rgba(59, 59, 59, 0.5)';
+      label.style.color = '#fff';
+      label.innerHTML = '';
+    }
+  });
+
+  label.appendChild(document.createTextNode(''));
+  checkbox.parentNode.insertBefore(label, checkbox.nextSibling);
+});
+
+
+    window.addEventListener("alert", function(event) {
+
+    } );
+</script>
 {% endblock content %}

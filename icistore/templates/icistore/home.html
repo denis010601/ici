@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
  <main class="main">
+    {% if content.videoImage and content.video %}
     <section class="video-section">
         <div class="wrapper">
             <div class="video-wrapper">
@@ -14,11 +15,21 @@
             </div>
         </div>
     </section>
+    {% else %}
+    <section class="video-section">
+        <div class="wrapper">
+                <img src="{% static 'img/logow.png' %}" alt="Логотип" class="video-logo">
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% if allproduct %}
     <section class="product">
+       
         <h2 class="title product__title title--section">Популярные модели</h2>
         <div class="wrapper product__wrapper">
              {% for product in allproduct %}
-            <a href="#" class="card-product">
+            <a href="{% url 'detail' category_name=product.category product_name=product.title %}" class="card-product">
                 <h3 class="card-product__title">{{ product.title }}</h3>
                 {% if product.images.first %}
                     <img src="{{ product.images.first.image.url }}" alt="{{ product.title }}" class="product__img">
@@ -26,7 +37,10 @@
             </a>
             {% endfor %}
         </div>
+    
     </section>
+    {% endif %}
+    {% if content.advantages.all %}
     <section class="advantage">
         <h2 class="title  title--section">ОТЛИЧНОЕ РЕШЕНИЕ ДЛЯ ВАШЕЙ КВАРТИРЫ</h2>
         <p class="desc desc--section  ">
@@ -47,6 +61,7 @@
             {% endfor %}
         </div>
     </section>
+    {% endif %}
   </main>
 
 {% endblock content %}
